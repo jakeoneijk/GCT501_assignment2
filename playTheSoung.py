@@ -1,6 +1,8 @@
 import pygame as pg
 import time
 
+#ssh pi@192.168.1.248
+
 soundType = {'ORIGINAL':0 , 'REVERB':1 , 'DISTORTED':2 , 'REVERBandDISTORTED':3}
 motionType = {'verticalMotion':0 , 'horizontalMotion':1,'circleMotion':2}
 
@@ -8,7 +10,7 @@ distortedActivated = 0
 reverbActivated = 0
 
 soundDir = []
-soundDir.append(["flute-A4.wav","cello-double.wav"])    #original sound dir
+soundDir.append(["./sound/dis_kic.wav"])    #original sound dir
 soundDir.append([])                                     #reverb sound dir
 soundDir.append([])                                     #distorted sound dir
 soundDir.append([])                                     #distorted reverb sound dir
