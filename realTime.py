@@ -119,6 +119,7 @@ def main():
             
             predict = pickle_model.predict(window.drop(columns=['timestamp']))
             print(predict[0])  #0: , 1: hold, 2:
+            connectionSock.send(predict[0])
             
             #Moving window
             data.drop(data.head(2).index, inplace=True)

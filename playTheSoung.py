@@ -12,6 +12,9 @@ print('메시지를 전송했습니다.')
 data = clientSock.recv(1024)
 print('받은 데이터 : ', data.decode('utf-8'))
 
+while True:
+    print(clientSock.recv(1024))
+
 soundType = {'ORIGINAL':0 , 'REVERB':1 , 'DISTORTED':2 , 'REVERBandDISTORTED':3}
 motionType = {'verticalMotion':0 , 'horizontalMotion':1,'circleMotion':2}
 
