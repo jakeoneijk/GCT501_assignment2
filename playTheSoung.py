@@ -29,12 +29,15 @@ def playTheSound(type , index):
 
 def receiveLeap(): # return -1: no leapmotion , 1: leapmotion activated
     print("receiveLeapMotion")
+    return -1
 
 def receiveAccSensor(): # return -1: no acc motion , 0 : verticalMotion , 1: horizontalMotion , 2: circleMotion
     print("receiveAccSensor")
+    return 0
 
 def receiveLightSensor(): # return -1: no lightmotion , 1: lightmotion activated
     print("receiveLightSensorSensor")
+    return -1
 
 initiate()
 
