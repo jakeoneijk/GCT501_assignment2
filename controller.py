@@ -7,13 +7,11 @@ class controller:
         self.leapmotion = leapMotionSensor.leapMotionSensor()
         self.play_sound = playSound.playSound()
         self.acc = accSensor.accSensor()
-        self.prev_received_Data_from_leap = -1
+
 
     def processLeapMotinoData(self, received_data):
-        if received_data != self.prev_received_Data_from_leap:
-            if received_data == 3:
-                self.play_sound.playTheSynthSound()
-        self.prev_received_Data_from_leap = received_data
+        if received_data == 3:
+            self.play_sound.playTheSynthSound()
 
     def processAccData(self,received_data):
         if received_data != -1:
