@@ -2,7 +2,7 @@ import pygame as pg
 import time
 
 #ssh pi@192.168.1.248
-'''
+
 from socket import *
 clientSock = socket(AF_INET, SOCK_STREAM)
 clientSock.connect(('192.168.1.248', 8080))
@@ -11,9 +11,12 @@ clientSock.send('I am a client'.encode('utf-8'))
 print('메시지를 전송했습니다.')
 data = clientSock.recv(1024)
 print('받은 데이터 : ', data.decode('utf-8'))
-'''
+
 soundType = {'ORIGINAL':0 , 'REVERB':1 , 'DISTORTED':2 , 'REVERBandDISTORTED':3}
 motionType = {'verticalMotion':0 , 'horizontalMotion':1,'circleMotion':2}
+
+#accSensorCount = [0,0,0]
+blockTheSignal = 0
 
 distortedActivated = 0
 reverbActivated = 0
@@ -42,9 +45,28 @@ def receiveLeap(): # return -1: no leapmotion , 1: leapmotion activated
     print("receiveLeapMotion")
     return -1
 
+#def initAccSensorCount():
+#    accSensorCount[0] = 0
+#    accSensorCount[1] = 0
+#    accSensorCount[2] = 0
+
 def receiveAccSensor(): # return -1: no acc motion , 0 : verticalMotion , 1: horizontalMotion , 2: circleMotion
+    # 1 stop - 1, 0 motion 0 , 3 motion 1 , 2 motion 2
+    global blockTheSignal
     receive = clientSock.recv(1024)[0]
     print("receiveAccSensor : ",receive)
+    if (receive  % 2) == 1:
+        receive = receive -2
+    if receive == 2:
+        receive = 0
+
+    if blockTheSignal > 0:
+        blockTheSignal = blockTheSignal - 1
+        return  -1
+    else:
+        if receive != -1:
+            blockTheSignal = 5
+
     return receive
 
 def receiveLightSensor(): # return -1: no lightmotion , 1: lightmotion activated
@@ -52,12 +74,6 @@ def receiveLightSensor(): # return -1: no lightmotion , 1: lightmotion activated
     return -1
 
 initiate()
-playTheSound(soundType['ORIGINAL'],0)
-playTheSound(soundType['ORIGINAL'],0)
-playTheSound(soundType['ORIGINAL'],0)
-playTheSound(soundType['ORIGINAL'],0)
-playTheSound(soundType['ORIGINAL'],0)
-time.sleep(100)
 
 while True:
     if receiveLeap() == 1:
