@@ -7,7 +7,7 @@ class leapMotionSensor:
         self.thresholdIgnoreError = 1
         self.isError = 0
         self.blockTheSignal = 0
-        self.blockNumber = 10000
+        self.blockNumber = 10
 
     def receiveData(self):
         lst = [0, 0, 0, 0]

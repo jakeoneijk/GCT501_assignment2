@@ -6,7 +6,7 @@ class controller:
     def __init__(self):
         self.leapmotion = leapMotionSensor.leapMotionSensor()
         self.play_sound = playSound.playSound()
-       # self.acc = accSensor.accSensor()
+        self.acc = accSensor.accSensor()
 
 
     def processLeapMotinoData(self, received_data):
@@ -24,6 +24,6 @@ class controller:
     def mainProcess(self):
         while True:
             receive_from_leap = self.leapmotion.receiveData()
-          #  receive_from_acc = self.acc.receiveData()
+            receive_from_acc = self.acc.receiveData()
             self.processLeapMotinoData(receive_from_leap)
-          #  self.processAccData(receive_from_acc)
+            self.processAccData(receive_from_acc)
