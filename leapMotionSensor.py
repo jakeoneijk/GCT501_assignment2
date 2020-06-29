@@ -15,7 +15,7 @@ class leapMotionSensor:
             reader = csv.reader(file)
             for row, x in enumerate(reader):
                 if row > 3 or row < 0:
-                    print ("Error",row)
+                    row = 3
                 lst[row] = int(float(x[0]))
         result = -1
         if (lst[0] == 0 and lst[1] == 0 and lst[2] == 0):
