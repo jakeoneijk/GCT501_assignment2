@@ -32,4 +32,22 @@ class playSound:
     def playTheSynthSound(self):
         self.sound[self.type][3+self.synthOrder].play()
         time.sleep(0.01)
-        self.synthOrder += 1
+        self.synthOrder = (self.synthOrder+1)%2
+
+    def typeUpdate(self):
+        if self.reverbActivated == 1 and self.distortedActivated == 1:
+            self.type = self.soundType['REVERBandDISTORTED']
+        elif self.reverbActivated == 1 and self.distortedActivated == 0:
+            self.type = self.soundType['REVERB']
+        elif self.reverbActivated == 0 and self.distortedActivated == 1:
+            self.type = self.soundType['DISTORTED']
+        elif self.reverbActivated == 0 and self.distortedActivated == 0:
+            self.type = self.soundType['ORIGINAL']
+
+    def changeTheReverbActivated(self):
+        self.reverbActivated = (self.reverbActivated + 1)%2
+        self.typeUpdate()
+
+    def changeTheDistortedActivated(self):
+        self.distortedActivated = (self.distortedActivated + 1)%2
+        self.typeUpdate()

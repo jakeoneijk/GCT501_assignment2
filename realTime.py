@@ -108,7 +108,7 @@ def main():
     data = pd.DataFrame()
     while True:
         data = data.append(getRealTimeData(index))
-        sleep(0.1)
+        sleep(0.01)
         index += 1
 
         if len(data) > 6:

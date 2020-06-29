@@ -29,6 +29,6 @@ class accSensor:
             return -1
         else:
             if receive != -1:
-                self.blockTheSignal = 5
+                self.blockTheSignal = self.blockNumber
 
         return receive
